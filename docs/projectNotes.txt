@@ -1,0 +1,95 @@
+Email System functionalities:
+
+- User Management: Create, read, update, and delete users.
+    - bool system for user admin vs reg user
+- Email Management: Send, receive, read, and delete emails.
+- File Storage: Store user data and email data on the file system.
+
+2. Classes Needed
+
+1. User: Represents a user in the system.
+2. Email: Represents an email.
+3. FileManager: Handles reading from and writing to the file system.
+
+ 3. Class Details
+
+ Class: User
+Data:
+- `userID`: Unique identifier for the user.
+- `username`: The username of the user.
+- `password`: The password for the user (in a real system, this would be hashed).
+- `emailAddress`: The user's email address.
+
+Methods:
+- `createUser()`: Create a new user.
+- `getUser()`: Retrieve user information.
+- `updateUser()`: Update user information.
+- `deleteUser()`: Delete a user.
+
+ Class: Email
+Data:
+- `emailID`: Unique identifier for the email.
+- `fromAddress`: The sender's email address.
+- `toAddress`: The recipient's email address.
+- `subject`: The subject of the email.
+- `content`: The content of the email.
+- `timestamp`: The time when the email was sent or received.
+- `isRead`: A flag indicating if the email has been read.
+
+Methods:
+- `sendEmail()`: Send a new email.
+- `receiveEmail()`: Receive an email.
+- `readEmail()`: Mark an email as read.
+- `deleteEmail()`: Delete an email.
+
+ Class: FileManager
+Data:
+- `filePath`: Path to the file where data is stored.
+
+Methods:
+- `readFromFile()`: Read data from a file.
+- `writeToFile()`: Write data to a file.
+- `updateFile()`: Update data in a file.
+- `deleteFromFile()`: Delete data from a file.
+
+Class Details with Methods
+
+ Class: User
+Data:
+- `userID`: Unique identifier for the user.
+- `username`: The username of the user.
+- `password`: The password for the user (in a real system, this would be hashed).
+- `emailAddress`: The user's email address.
+
+Methods:
+- `createUser()`: Create a new user.
+- `getUser(userID)`: Retrieve user information based on `userID`.
+- `updateUser(userID, updatedData)`: Update user information based on `userID` and `updatedData`.
+- `deleteUser(userID)`: Delete a user based on `userID`.
+
+ Class: Email
+Data:
+- `emailID`: Unique identifier for the email.
+- `fromAddress`: The sender's email address.
+- `toAddress`: The recipient's email address.
+- `subject`: The subject of the email.
+- `content`: The content of the email.
+- `timestamp`: The time when the email was sent or received.
+- `isRead`: A flag indicating if the email has been read.
+
+Methods:
+- `sendEmail(fromAddress, toAddress, subject, content)`: Send a new email.
+- `receiveEmail(emailID)`: Receive an email based on `emailID`.
+- `readEmail(emailID)`: Mark an email as read based on `emailID`.
+- `deleteEmail(emailID)`: Delete an email based on `emailID`.
+
+ Class: FileManager
+Data:
+- `filePath`: Path to the file where data is stored.
+
+Methods:
+- `readFromFile(filePath)`: Read data from a file at `filePath`.
+- `writeToFile(filePath, data)`: Write data to a file at `filePath`.
+- `updateFile(filePath, data)`: Update data in a file at `filePath`.
+- `deleteFromFile(filePath)`: Delete data from a file at `filePath`.
+
