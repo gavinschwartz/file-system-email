@@ -4,11 +4,13 @@
 #include <string>
 #include "login.hpp"
 #include <fstream>
+#include <sys/types.h>
+#include <dirent.h>
 
 User createUser();
 
-bool directoryExists(string& dirName);
-bool createDirectory(string& dirName);
+bool directoryExists(string &dirName);
+bool createDirectory(string &dirName);
 
 using namespace std;
 
@@ -90,11 +92,21 @@ User createUser()
     return newUser;
 }
 
-bool directoryExists(string& dirName) {
-    fstream testDir((dirName + "/.").c_str());
-    return testDir.good();
+bool directoryExists(string &dirName)
+{
+    DIR *dir = opendir(("./" + dirName).c_str());
+    if (dir)
+    {
+        closedir(dir);
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
-bool createDirectory(string& dirName) {
+bool createDirectory(string &dirName)
+{
     return system(("mkdir " + dirName).c_str()) == 0;
 }
