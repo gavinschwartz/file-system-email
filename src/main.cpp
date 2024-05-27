@@ -12,9 +12,9 @@ int main()
     rootUser.userID = "gpDlgb1DEz";
     rootUser.username = "root";
     rootUser.password = "password";
-    rootUser.emailAddress = "gpDlgb1DEz@aol.com";
+    rootUser.email = "gpDlgb1DEz@aol.com";
 
-    
+
 
 
 
