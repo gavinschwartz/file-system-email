@@ -6,6 +6,7 @@
 #include <fstream>
 #include <sys/types.h>
 #include <dirent.h>
+#include "LinkedList.hpp"
 
 User createUser();
 
@@ -55,7 +56,15 @@ int main()
     {
         return 1;
     }
+    // TODO: Load up all existing users from file.
+    LinkedList<User> allUsers;
+    //use bloglist as an example to load up all the users from the file. 
+
+
+
     User newUser = createUser();
+
+    allUsers.add(newUser); //adding new user to list 
 
     fstream outputFile;
 
