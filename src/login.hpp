@@ -31,6 +31,8 @@ bool login()
     string userUsername;
     string userPassword;
 
+    cout << "Login as existing user. " << endl;
+
     cout << "Enter your username." << endl;
     cin >> userUsername;
 

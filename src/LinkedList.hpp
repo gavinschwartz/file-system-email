@@ -13,7 +13,7 @@ public:
     Data data;
     LinkedListNode<Data> *next;
 
-    LinkListNode()
+    LinkedListNode()
     {
         next = nullptr;
     }
@@ -61,7 +61,7 @@ public:
     }
     void remove(int index)
     {
-        if (idndex < 0 || index >= getLength()) // Check if index is valid
+        if (index < 0 || index >= getLength()) // Check if index is valid
         {
             cout << "Invalid index!" << endl
                  << endl; // Print error message if invalid
@@ -79,7 +79,7 @@ public:
         else
         {
             previousNode = head;                    // Start searching with the head of the list
-            for (int i = 0; i < postIndex - 1; i++) // Traverse to the node before the one to delete
+            for (int i = 0; i < index - 1; i++) // Traverse to the node before the one to delete
             {
                 previousNode = previousNode->next; // Move to the next node
             }
@@ -110,14 +110,12 @@ public:
         }
     }
 
-    void savetoFile(string fileName)
+    void savetoFile(fstream &outputFile)
     {
-        fstream outputFile;                  // File stream for output
-        outputFile.open(fileName, ios::out); // Open the file for writing
 
         outputFile << getLength() << endl; // Write the number of posts
 
-        LinkedListtNode<Data> *currentNode = head; // Start with the head of the list
+        LinkedListNode<Data> *currentNode = head; // Start with the head of the list
         while (currentNode != nullptr)             // Traverse the list until the end
         {
             Data currentData = currentNode->data; // Get the current post

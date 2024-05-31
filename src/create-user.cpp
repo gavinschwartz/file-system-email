@@ -8,16 +8,20 @@
 #include <dirent.h>
 #include "LinkedList.hpp"
 
+// function prototypes
 User createUser();
 
 bool directoryExists(string &dirName);
 bool createDirectory(string &dirName);
+void loadUsersFromFile(string &users, LinkedList<User> &allUsers);
 
 using namespace std;
 
 int main()
 
 {
+    LinkedList<User> allUsers; // collection of all our users
+    int userCount = 0;
     string dirName = "data";
     if (!directoryExists(dirName))
     {
@@ -43,12 +47,16 @@ int main()
             cerr << "Error creating file 'data/users.txt'" << endl;
             return 1;
         }
+
         outputFile.close(); // Close the output file
 
         // Reopen input file
         inputFile.open("data/users.txt", ios::in);
     }
-    inputFile.close();
+    else // if the file did already exist
+    {
+        inputFile >> userCount; // Read the user count from the file
+    }
 
     bool loginSuccess = login();
 
@@ -56,26 +64,41 @@ int main()
     {
         return 1;
     }
-    // TODO: Load up all existing users from file.
-    LinkedList<User> allUsers;
-    //use bloglist as an example to load up all the users from the file. 
 
+    // Load up all existing users from file.
+    cout << "user count = " << userCount << endl; // Output the user count
+    inputFile.ignore(1, '\n');                    // Ignore the newline character after the count
+    for (int i = 0; i < userCount; i++)
+    {
+        User userData;
+        char *buffer = new char[128];
 
+        inputFile.getline(buffer, 64);
+        userData.userID = string(buffer);
 
+        inputFile.getline(buffer, 64);
+        userData.username = string(buffer);
+
+        inputFile.getline(buffer, 64);
+        userData.password = string(buffer);
+
+        inputFile.getline(buffer, 64);
+        userData.email = string(buffer);
+
+        allUsers.add(userData); // adding new user to list
+
+        delete[] buffer; // every time you allocate something with new, must unallocate with delete to free it
+    }
+
+    // input user data from the console
     User newUser = createUser();
 
-    allUsers.add(newUser); //adding new user to list 
+    allUsers.add(newUser); // adding new user to list
 
-    fstream outputFile;
+    fstream outputFile;                  // File stream for output
+    outputFile.open("data/users.txt", ios::out); // Open the file for writing
 
-    // executing fstream method to open this folder
-    outputFile.open("data/users.txt", ios::out);
-
-    outputFile << newUser.userID << endl;
-    outputFile << newUser.username << endl;
-    outputFile << newUser.password << endl;
-    outputFile << newUser.email << endl;
-    outputFile << newUser.isAdmin << endl;
+    allUsers.savetoFile(outputFile);
 
     return 0;
 }

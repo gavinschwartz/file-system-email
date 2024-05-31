@@ -18,10 +18,10 @@ public:
 
     string toString()
     {
-        return "User: " + username + "\n" + "Emai;: " + email + "\n";
+        return "User: " + username + "\n" + "Email;: " + email + "\n";
     }
 
-    void saveToFile(fstream outputFile)
+    void saveToFile(fstream &outputFile)
     {
         outputFile << userID << endl;   // Write the post text
         outputFile << username << endl; // Write the user name
