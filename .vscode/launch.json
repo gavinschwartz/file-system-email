@@ -5,11 +5,23 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "debug create-user",
+            "name": "create-user (debug)",
+            "cwd": "${workspaceFolder}",
+            "externalConsole": true,
             "type": "cppdbg",
-            "request": "attach",
-            "program": "out/create-user.exe",
+            "request": "launch",
+            "program": "${workspaceFolder}/out/create-user.exe",
+            "MIMode": "lldb"
+        },
+        {
+            "name": "send-email (debug)",
+            "cwd": "${workspaceFolder}",
+            "externalConsole": true,
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/out/send-email.exe",
             "MIMode": "lldb"
         }
+
     ]
 }
