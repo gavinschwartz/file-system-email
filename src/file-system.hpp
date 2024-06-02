@@ -1,3 +1,5 @@
+#ifndef FILE_SYSTEM_HPP
+#define FILE_SYSTEM_HPP
 #include <cstdlib>
 #include <iostream>
 #include <string>
@@ -78,3 +80,4 @@ void createFileIfNotExist(string &fileName)
         }
     }
 }
+#endif
