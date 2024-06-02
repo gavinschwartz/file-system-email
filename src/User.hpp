@@ -18,15 +18,16 @@ public:
 
     string toString()
     {
-        return "User: " + username + "\n" + "Email;: " + email + "\n";
+        return "User: " + username + "\n" + "Email: " + email + "\n" + "isAdmin:" + (isAdmin ? "true" : "false") + "\n";
     }
 
     void saveToFile(fstream &outputFile)
     {
-        outputFile << userID << endl;   // Write the post text
-        outputFile << username << endl; // Write the user name
-        outputFile << password << endl; // Write the timestamp
-        outputFile << email << endl;    // Write the timestamp
+        outputFile << userID << endl;
+        outputFile << username << endl;
+        outputFile << password << endl;
+        outputFile << email << endl;
+        outputFile << isAdmin << endl;
     }
 };
 

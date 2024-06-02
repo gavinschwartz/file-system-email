@@ -61,3 +61,20 @@ bool fileExists(string &fileName)
         return true;
     }
 }
+
+void createFileIfNotExist(string &fileName)
+{
+    bool fileAlreadyExists = fileExists(fileName);
+    if (!fileAlreadyExists)
+    {
+        cout << fileName << " does not exist, creating the file" << endl;
+
+        // Create the new empty output file
+        fstream outputFile(fileName, ios::out);
+        if (!outputFile)
+        {
+            cerr << "Error creating file " << fileName << endl;
+            exit(1);
+        }
+    }
+}

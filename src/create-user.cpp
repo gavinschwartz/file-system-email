@@ -28,25 +28,10 @@ int main()
     string fileName = "data/users.txt";
     bool fileAlreadyExists = fileExists(fileName);
 
+    createFileIfNotExist(fileName);
     fstream inputFile(fileName, ios::in);
-    if (!fileAlreadyExists)
-    {
-        cout << fileName << " does not exist, creating the file" << endl;
 
-        // Create the new empty output file
-        fstream outputFile(fileName, ios::out);
-        if (!outputFile)
-        {
-            cerr << "Error creating file " << fileName << endl;
-            return 1;
-        }
-
-        outputFile.close(); // Close the output file
-
-        // Reopen input file
-        inputFile.open(fileName, ios::in);
-    }
-    else // if the file did already exist
+    if (fileAlreadyExists)
     {
         inputFile >> userCount; // Read the user count from the file
     }
@@ -77,6 +62,11 @@ int main()
 
         inputFile.getline(buffer, 64);
         userData.email = string(buffer);
+
+        inputFile.getline(buffer, 64);
+        userData.isAdmin = buffer == string("1");
+
+        
 
         allUsers.add(userData); // adding new user to list
 
@@ -112,7 +102,12 @@ User createUser()
     cout << "Enter Email." << endl;
     cin >> newUser.email;
 
-    newUser.isAdmin = false;
+    cout << "Are you an Admin? " << endl;
+
+    string dummy;
+    cin >> dummy;
+    cin.ignore(1, '\n');
+    newUser.isAdmin = dummy == "Y";
 
     return newUser;
 }
