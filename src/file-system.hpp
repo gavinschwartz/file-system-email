@@ -9,8 +9,11 @@ using namespace std;
 
 bool directoryExists(string &dirName);
 bool createDirectory(string &dirName);
-//TODO: create fileExists method code.
-//bool fileExists(string &fileName);
+void createDirectoryIfNotExist(string &dirName);
+bool fileExists(string &fileName);
+
+// TODO: create fileExists method code.
+// bool fileExists(string &fileName);
 
 bool directoryExists(string &dirName)
 {
@@ -29,4 +32,32 @@ bool directoryExists(string &dirName)
 bool createDirectory(string &dirName)
 {
     return system(("mkdir " + dirName).c_str()) == 0;
+}
+
+void createDirectoryIfNotExist(string &dirName)
+{
+    if (!directoryExists(dirName))
+    {
+        // Directory does not exist, create it
+        if (!createDirectory(dirName))
+        {
+            cerr << "Error creating directory 'data'" << endl;
+            exit(1);
+        }
+    }
+}
+
+bool fileExists(string &fileName)
+{
+    fstream inputFile(fileName, ios::in);
+    if (!inputFile.is_open())
+    {
+        inputFile.close(); // Close the input file if it was open
+        return false;
+    }
+    else
+    {
+        inputFile.close(); // Close the input file if it was open
+        return true;
+    }
 }

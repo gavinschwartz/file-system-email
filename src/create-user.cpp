@@ -22,35 +22,29 @@ int main()
     LinkedList<User> allUsers; // collection of all our users
     int userCount = 0;
     string dirName = "data";
-    if (!directoryExists(dirName))
-    {
-        // Directory does not exist, create it
-        if (!createDirectory(dirName))
-        {
-            cerr << "Error creating directory 'data'" << endl;
-            return 1;
-        }
-    }
+    createDirectoryIfNotExist(dirName);
 
     // Check if users.txt exists, if not create it
-    fstream inputFile("data/users.txt", ios::in);
-    if (!inputFile.is_open())
+    string fileName = "data/users.txt";
+    bool fileAlreadyExists = fileExists(fileName);
+
+    fstream inputFile(fileName, ios::in);
+    if (!fileAlreadyExists)
     {
-        inputFile.close(); // Close the input file if it was open
-        cout << "data/users.txt does not exist, creating the file" << endl;
+        cout << fileName << " does not exist, creating the file" << endl;
 
         // Create the new empty output file
-        fstream outputFile("data/users.txt", ios::out);
+        fstream outputFile(fileName, ios::out);
         if (!outputFile)
         {
-            cerr << "Error creating file 'data/users.txt'" << endl;
+            cerr << "Error creating file " << fileName << endl;
             return 1;
         }
 
         outputFile.close(); // Close the output file
 
         // Reopen input file
-        inputFile.open("data/users.txt", ios::in);
+        inputFile.open(fileName, ios::in);
     }
     else // if the file did already exist
     {
@@ -94,7 +88,7 @@ int main()
 
     allUsers.add(newUser); // adding new user to list
 
-    fstream outputFile;                  // File stream for output
+    fstream outputFile;                          // File stream for output
     outputFile.open("data/users.txt", ios::out); // Open the file for writing
 
     allUsers.savetoFile(outputFile);
@@ -122,4 +116,3 @@ User createUser()
 
     return newUser;
 }
-
