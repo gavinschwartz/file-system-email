@@ -7,12 +7,11 @@
 #include "User.hpp"
 #include "login.hpp"
 #include "LinkedList.hpp"
+#include "file-system.hpp"
 
 // function prototypes
 User createUser();
 
-bool directoryExists(string &dirName);
-bool createDirectory(string &dirName);
 void loadUsersFromFile(string &users, LinkedList<User> &allUsers);
 
 using namespace std;
@@ -124,21 +123,3 @@ User createUser()
     return newUser;
 }
 
-bool directoryExists(string &dirName)
-{
-    DIR *dir = opendir(("./" + dirName).c_str());
-    if (dir)
-    {
-        closedir(dir);
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
-
-bool createDirectory(string &dirName)
-{
-    return system(("mkdir " + dirName).c_str()) == 0;
-}
