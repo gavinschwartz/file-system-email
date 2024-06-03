@@ -80,7 +80,7 @@ public:
         }
         else
         {
-            previousNode = head;                    // Start searching with the head of the list
+            previousNode = head;                // Start searching with the head of the list
             for (int i = 0; i < index - 1; i++) // Traverse to the node before the one to delete
             {
                 previousNode = previousNode->next; // Move to the next node
@@ -113,13 +113,17 @@ public:
         }
     }
 
-    void savetoFile(fstream &outputFile)
+    void savetoFile(fstream &outputFile, int skip)
     {
-
-        outputFile << getLength() << endl; // Write the number of posts
-
         LinkedListNode<Data> *currentNode = head; // Start with the head of the list
-        while (currentNode != nullptr)             // Traverse the list until the end
+        for (int i = 0; i < skip; i++)
+        {
+            currentNode = currentNode->next;
+        }
+
+        outputFile << (getLength() - skip) << endl; // Write the number of posts
+
+        while (currentNode != nullptr) // Traverse the list until the end
         {
             Data currentData = currentNode->data; // Get the current post
 

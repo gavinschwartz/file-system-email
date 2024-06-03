@@ -33,10 +33,13 @@ public:
     }
 };
 
+// function prototypes
 User createUser();
 
 LinkedList<User> loadUsersFromFile();
+User createRootUser();
 
+// function definitions
 User createUser()
 {
     User newUser;
@@ -66,6 +69,9 @@ User createUser()
 LinkedList<User> loadUsersFromFile()
 {
     LinkedList<User> allUsers; // collection of all our users
+    User rootUser = createRootUser();
+    allUsers.add(rootUser);
+    
     int userCount = 0;
     string dirName = "data";
     createDirectoryIfNotExist(dirName);
@@ -110,5 +116,20 @@ LinkedList<User> loadUsersFromFile()
     }
     return allUsers;
 }
+
+User createRootUser()
+{
+
+    User rootUser;
+
+    rootUser.userID = "gpDlgb1DEz";
+    rootUser.username = "root";
+    rootUser.password = "password";
+    rootUser.email = "gpDlgb1DEz@aol.com";
+    rootUser.isAdmin = true;
+
+    return rootUser;
+}
+
 
 #endif

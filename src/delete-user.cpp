@@ -30,6 +30,12 @@ int main()
     cout << "Which user index do you want to delete? " << endl;
     int index;
     cin >> index;
+    if (index == 0)
+    {
+        cerr << "Cannot delete root user. " << endl;
+        exit(1);
+    }
+    
 
     // reading in remove user method
     allUsers.remove(index);
@@ -37,7 +43,7 @@ int main()
     // output save changes
     fstream outputFile;
     outputFile.open("data/users.txt", ios::out); // Open the file for writing
-    allUsers.savetoFile(outputFile);
+    allUsers.savetoFile(outputFile,1);
 
     return 0;
 }

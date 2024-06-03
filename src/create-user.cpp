@@ -33,7 +33,7 @@ int main()
     fstream outputFile;                          // File stream for output
     outputFile.open("data/users.txt", ios::out); // Open the file for writing
 
-    allUsers.savetoFile(outputFile);
+    allUsers.savetoFile(outputFile,1);
 
     return 0;
 }
