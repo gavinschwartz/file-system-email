@@ -44,6 +44,7 @@ public:
         }
         return count; // Return the total count of nodes
     }
+
     void add(Data newData)
     {
         LinkedListNode<Data> *newNode = new LinkedListNode<Data>; // Create a new node
@@ -59,6 +60,7 @@ public:
             head = newNode; // Set the head to the new node
         }
     }
+
     void remove(int index)
     {
         if (index < 0 || index >= getLength()) // Check if index is valid
@@ -67,6 +69,7 @@ public:
                  << endl; // Print error message if invalid
             return;       // Exit the function
         }
+
         LinkedListNode<Data> *nodeToDelete;
         LinkedListNode<Data> *previousNode;
 
@@ -78,7 +81,7 @@ public:
         }
         else
         {
-            previousNode = head;                    // Start searching with the head of the list
+            previousNode = head;                // Start searching with the head of the list
             for (int i = 0; i < index - 1; i++) // Traverse to the node before the one to delete
             {
                 previousNode = previousNode->next; // Move to the next node
@@ -104,19 +107,24 @@ public:
         while (currentNode != nullptr) // Traverse the list until the end
         {
             Data currentData = currentNode->data;
-            cout << currentData.toString(); // Get the current post
+            cout << printIndex << ": " << endl;
+            cout << currentData.toString() << endl; // Get the current post
             currentNode = currentNode->next;
             printIndex++;
         }
     }
 
-    void savetoFile(fstream &outputFile)
+    void savetoFile(fstream &outputFile, int skip)
     {
-
-        outputFile << getLength() << endl; // Write the number of posts
-
         LinkedListNode<Data> *currentNode = head; // Start with the head of the list
-        while (currentNode != nullptr)             // Traverse the list until the end
+        for (int i = 0; i < skip; i++)
+        {
+            currentNode = currentNode->next;
+        }
+
+        outputFile << (getLength() - skip) << endl; // Write the number of posts
+
+        while (currentNode != nullptr) // Traverse the list until the end
         {
             Data currentData = currentNode->data; // Get the current post
 
@@ -126,6 +134,42 @@ public:
 
         outputFile.close(); // Close the file
         cout << "Successfully saved!" << endl;
+    }
+
+    int getIndexByID(string id)
+    {
+        int index = 0;
+        LinkedListNode<Data> *currentNode = head; // Start with the head of the list
+        while (currentNode != nullptr)            // Traverse the list until the end
+        {
+            Data currentData = currentNode->data; // Get the current post
+            if (currentNode->data.id == id)
+            {
+                return index;
+            }
+
+            currentNode = currentNode->next;
+            index++;
+        }
+
+        return -1;
+    }
+
+    Data getDataByIndex(int index)
+    {
+        if (index < 0 || index >= getLength()) // Check if index is valid
+        {
+            cout << "Invalid index!" << endl
+                 << endl; // Print error message if invalid
+            return Data();       // Exit the function
+        }
+
+        LinkedListNode<Data> *currentNode = head; // Start with the head of the list
+        for (int i = 0; i < index; i++)
+        {
+            currentNode = currentNode->next;
+        }
+        return currentNode->data;
     }
 };
 
