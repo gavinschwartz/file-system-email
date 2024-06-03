@@ -122,7 +122,7 @@ User createRootUser()
 
     User rootUser;
 
-    rootUser.id = "gpDlgb1DEz";
+    rootUser.id = "root";
     rootUser.username = "root";
     rootUser.password = "password";
     rootUser.email = "gpDlgb1DEz@aol.com";

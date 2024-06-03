@@ -14,10 +14,11 @@ using namespace std;
 int main()
 
 {
-    bool loginSuccess = login();
+    User loggedInUser = login();
 
-    if (loginSuccess == false)
+    if (!loggedInUser.isAdmin)
     {
+        cout << "You must be an admin to run this. " << endl;
         return 1;
     }
 

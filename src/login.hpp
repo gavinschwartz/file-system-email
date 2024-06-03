@@ -4,36 +4,43 @@
 #include "User.hpp"
 #include <iostream>
 
-
-bool login();
+User login();
 
 using namespace std;
 
-
-bool login()
+User login()
 {
-    User rootUser = createRootUser();
+    LinkedList<User> allUsers = loadUsersFromFile();
 
-    string userUsername;
+    string userID;
     string userPassword;
 
     cout << "Login as existing user. " << endl;
 
-    cout << "Enter your username." << endl;
-    cin >> userUsername;
+    cout << "Enter your userID" << endl;
+    cin >> userID;
 
     cout << "Enter your password." << endl;
     cin >> userPassword;
 
-    if (userUsername == rootUser.username && userPassword == rootUser.password)
+    int indexOfUser = allUsers.getIndexByID(userID);
+    if (indexOfUser == -1)
+    {
+        cerr << "User not found" << endl;
+        exit(1);
+    }
+
+    User user = allUsers.getDataByIndex(indexOfUser);
+
+    if (userID == user.username && userPassword == user.password)
     {
         cout << "Login successful!" << endl;
-        return true;
+        return user;
     }
     else
     {
         cout << "Login failure." << endl;
-        return false;
+        exit(1);
     }
 }
 

@@ -161,7 +161,7 @@ public:
         {
             cout << "Invalid index!" << endl
                  << endl; // Print error message if invalid
-            return;       // Exit the function
+            return Data();       // Exit the function
         }
 
         LinkedListNode<Data> *currentNode = head; // Start with the head of the list
