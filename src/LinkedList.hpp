@@ -44,6 +44,7 @@ public:
         }
         return count; // Return the total count of nodes
     }
+
     void add(Data newData)
     {
         LinkedListNode<Data> *newNode = new LinkedListNode<Data>; // Create a new node
@@ -59,6 +60,7 @@ public:
             head = newNode; // Set the head to the new node
         }
     }
+
     void remove(int index)
     {
         if (index < 0 || index >= getLength()) // Check if index is valid
@@ -104,7 +106,8 @@ public:
         while (currentNode != nullptr) // Traverse the list until the end
         {
             Data currentData = currentNode->data;
-            cout << currentData.toString(); // Get the current post
+            cout << printIndex << ": " << endl;
+            cout << currentData.toString() << endl; // Get the current post
             currentNode = currentNode->next;
             printIndex++;
         }

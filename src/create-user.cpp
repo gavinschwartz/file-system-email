@@ -24,6 +24,7 @@ int main()
 
     // Load up all existing users from file.
     LinkedList<User> allUsers = loadUsersFromFile();
+    
     // input user data from the console
     User newUser = createUser();
 
