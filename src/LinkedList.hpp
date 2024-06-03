@@ -69,6 +69,7 @@ public:
                  << endl; // Print error message if invalid
             return;       // Exit the function
         }
+
         LinkedListNode<Data> *nodeToDelete;
         LinkedListNode<Data> *previousNode;
 
@@ -133,6 +134,42 @@ public:
 
         outputFile.close(); // Close the file
         cout << "Successfully saved!" << endl;
+    }
+
+    int getIndexByID(string id)
+    {
+        int index = 0;
+        LinkedListNode<Data> *currentNode = head; // Start with the head of the list
+        while (currentNode != nullptr)            // Traverse the list until the end
+        {
+            Data currentData = currentNode->data; // Get the current post
+            if (currentNode->data.id == id)
+            {
+                return index;
+            }
+
+            currentNode = currentNode->next;
+            index++;
+        }
+
+        return -1;
+    }
+
+    Data getDataByIndex(int index)
+    {
+        if (index < 0 || index >= getLength()) // Check if index is valid
+        {
+            cout << "Invalid index!" << endl
+                 << endl; // Print error message if invalid
+            return;       // Exit the function
+        }
+
+        LinkedListNode<Data> *currentNode = head; // Start with the head of the list
+        for (int i = 0; i < index; i++)
+        {
+            currentNode = currentNode->next;
+        }
+        return currentNode->data;
     }
 };
 

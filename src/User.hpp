@@ -11,7 +11,7 @@ class User
 {
 
 public:
-    string userID;
+    string id;
     string username;
     string password;
     string email;
@@ -25,7 +25,7 @@ public:
 
     void saveToFile(fstream &outputFile)
     {
-        outputFile << userID << endl;
+        outputFile << id << endl;
         outputFile << username << endl;
         outputFile << password << endl;
         outputFile << email << endl;
@@ -45,7 +45,7 @@ User createUser()
     User newUser;
 
     cout << "Enter UserID." << endl;
-    cin >> newUser.userID;
+    cin >> newUser.id;
 
     cout << "Enter Username." << endl;
     cin >> newUser.username;
@@ -71,7 +71,7 @@ LinkedList<User> loadUsersFromFile()
     LinkedList<User> allUsers; // collection of all our users
     User rootUser = createRootUser();
     allUsers.add(rootUser);
-    
+
     int userCount = 0;
     string dirName = "data";
     createDirectoryIfNotExist(dirName);
@@ -96,7 +96,7 @@ LinkedList<User> loadUsersFromFile()
         char *buffer = new char[128];
 
         inputFile.getline(buffer, 64);
-        userData.userID = string(buffer);
+        userData.id = string(buffer);
 
         inputFile.getline(buffer, 64);
         userData.username = string(buffer);
@@ -122,7 +122,7 @@ User createRootUser()
 
     User rootUser;
 
-    rootUser.userID = "gpDlgb1DEz";
+    rootUser.id = "gpDlgb1DEz";
     rootUser.username = "root";
     rootUser.password = "password";
     rootUser.email = "gpDlgb1DEz@aol.com";

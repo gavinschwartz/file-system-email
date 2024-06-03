@@ -27,23 +27,29 @@ int main()
     allUsers.print();
 
     // asking user which index to remove user
-    cout << "Which user index do you want to delete? " << endl;
-    int index;
-    cin >> index;
-    if (index == 0)
+    cout << "What is the ID of the user you want to delete? " << endl;
+    string id;
+    cin >> id;
+    if (id == string("root"))
     {
         cerr << "Cannot delete root user. " << endl;
         exit(1);
     }
-    
 
     // reading in remove user method
-    allUsers.remove(index);
+    int indexToDelete = allUsers.getIndexByID(id);
+    if (indexToDelete == -1)
+    {
+        cerr << "User not found" << endl;
+        exit(1);
+    }
+
+    allUsers.remove(indexToDelete);
 
     // output save changes
     fstream outputFile;
     outputFile.open("data/users.txt", ios::out); // Open the file for writing
-    allUsers.savetoFile(outputFile,1);
+    allUsers.savetoFile(outputFile, 1);
 
     return 0;
 }
